@@ -18,14 +18,6 @@ The "algorithm" is laid out in [`planner.py`](./planner.py).
 
 [SES](https://aws.amazon.com/ses/) is used to email my partner and I with the meals for the week.
 
-## Deploying
-
-Everything is manual for now. Run this command and load it in the lambda function.
-
-```bash
-zip -r lambda.zip s3_util.py ses_util.py trello.py planner.py
-```
-
 ## Running locally
 
 It's easier to run this locally than zip up everything and run it in Lambda. Everything is dockerized, so it should be a breeze.
@@ -59,20 +51,39 @@ docker build . -t meal-planner:latest
 Finally, run it:
 
 ```bash
-docker run --rm \
-  --env-file docker.env \
-  -v /path/to/meal-planner:/usr/local/src/app \
-  -it meal-planner:latest
+docker run --rm --env-file docker.env -it meal-planner:latest
 ```
 
 I like to chain them together:
 
 ```bash
-docker build . -t meal-planner:latest && docker run --rm --env-file docker.env -v /path/to/meal-planner:/usr/local/src/app -it meal-planner:latest
+docker build . -t meal-planner:latest && docker run --rm --env-file docker.env -it meal-planner:latest
 ```
 
 You'll find yourself in the running docker container. From there you can run the script:
 
+```bash
+python planner.py
 ```
-root@b07c5894d6a5:/usr/local/src/app# python planner.py
+
+## Deploying
+
+Everything is manual for now. First, start the docker container without the `--rm` flag.
+
+```bash
+docker build . -t meal-planner:latest && docker run -it meal-planner:latest
 ```
+
+Then, run this command from inside the docker container:
+
+```bash
+./build_zip.sh
+```
+
+Next, exit the container, and copy the zip out:
+
+```bash
+docker cp $(docker ps -aq --filter ancestor=meal-planner):/usr/src/app/lambda.zip .
+```
+
+Finally, load the `lambda.zip` file into Lambda.

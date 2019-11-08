@@ -1,15 +1,21 @@
 FROM python:3.7
 
-WORKDIR /usr/local/src/app
+# Install zip so we can zip the files and libs from inside the container.
+RUN apt-get update && apt-get install zip
+
+RUN mkdir -p /usr/src/app
 
 # Install dependencies.
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+COPY requirements.txt /usr/src/app/
+RUN pip install --target /usr/src/app/package -r /usr/src/app/requirements.txt
 
 # Copy everything over.
-COPY . .
+COPY . /usr/src/app/
 
 # Set the python path so modules "work".
-ENV PYTHONPATH "/usr/local/src/app${PYTHONPATH:+:${PYTHONPATH}}"
+ENV PYTHONPATH "/usr/src/app${PYTHONPATH:+:${PYTHONPATH}}"
+
+# Set working directory.
+WORKDIR /usr/src/app
 
 ENTRYPOINT [ "/bin/bash" ]
