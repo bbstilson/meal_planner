@@ -1,6 +1,5 @@
 import re
-# from botocore.vendored import requests # comment this out for local development in docker
-import requests # uncomment for local development in docker.
+import requests
 
 class Trello:
     def __init__(self, key, token, url_base, dinner_list_id):
