@@ -9,7 +9,7 @@ from trello import Trello
 API_KEY   = os.environ['API_KEY']
 TOKEN     = os.environ['TOKEN']
 URL_BASE  = os.environ['URL_BASE']
-LIST_ID   = os.environ['DINNER_LIST_ID']
+LIST_ID   = os.environ['LIST_ID']
 
 # S3 envvars
 BUCKET    = os.environ['BUCKET']
@@ -17,12 +17,12 @@ KEY       = os.environ['KEY']
 
 # SES envvars
 MY_EMAIL  = os.environ['MY_EMAIL']
-GF_EMAIL  = os.environ['GF_EMAIL']
+SO_EMAIL  = os.environ['SO_EMAIL']
 
 # 0) Initialize all the helper classes.
 s3 = S3Util(BUCKET, KEY)
 trello = Trello(API_KEY, TOKEN, URL_BASE, LIST_ID)
-ses = SESUtil(MY_EMAIL, [ MY_EMAIL, GF_EMAIL ])
+ses = SESUtil(MY_EMAIL, [ MY_EMAIL, SO_EMAIL ])
 
 # 1) Download suggest counts from S3.
 suggest_counts = s3.get_suggest_counts()

@@ -25,3 +25,50 @@ Everything is manual for now. Run this command and load it in the lambda functio
 ```bash
 zip -r lambda.zip s3_util.py ses_util.py trello.py planner.py
 ```
+
+## Running locally
+
+It's easier to run this locally than zip up everything and run it in Lambda.
+
+Everything is dockerized, so it should be a breeze.
+
+You'll need a `docker.env` file with all the secrets:
+
+```
+API_KEY=what
+TOKEN=ever
+
+BUCKET=these
+KEY=are
+
+URL_BASE=https://api.trello.com/1
+LIST_ID=you
+
+MY_EMAIL=gotta
+SO_EMAIL=add
+
+AWS_ACCESS_KEY_ID=them
+AWS_SECRET_ACCESS_KEY=your
+AWS_DEFAULT_REGION=self
+```
+
+Then you can build the image:
+
+```bash
+docker build . -t meal-planner:latest
+```
+
+And run it:
+
+```bash
+docker run --rm \
+  --env-file docker.env \
+  -v /path/to/meal-planner:/usr/local/src/app \
+  -it meal-planner:latest
+```
+
+I like to chain them together:
+
+```bash
+docker build . -t meal-planner:latest && docker run --rm --env-file docker.env -v /path/to/meal-planner:/usr/local/src/app -it meal-planner:latest
+```
