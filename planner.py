@@ -46,7 +46,7 @@ prioritized = sorted(scored, key=lambda x: x[1])[:2]
 fst_mid = prioritized[0][0]
 snd_mid = prioritized[1][0]
 
-# 6) Increment those two scores in the map
+# 6) Increment those two scores in the dict.
 suggest_counts[fst_mid] += 1
 suggest_counts[snd_mid] += 1
 
@@ -54,5 +54,5 @@ suggest_counts[snd_mid] += 1
 meals_to_send = [meal for meal in meals if meal['id'] == fst_mid or meal['id'] == snd_mid]
 ses.send_email(meals_to_send)
 
-# 8) update the suggest_counts object in s3
+# 8) Finally, update the suggest_counts object in s3.
 s3.update_suggest_counts(suggest_counts)
