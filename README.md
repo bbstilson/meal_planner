@@ -28,11 +28,9 @@ zip -r lambda.zip s3_util.py ses_util.py trello.py planner.py
 
 ## Running locally
 
-It's easier to run this locally than zip up everything and run it in Lambda.
+It's easier to run this locally than zip up everything and run it in Lambda. Everything is dockerized, so it should be a breeze.
 
-Everything is dockerized, so it should be a breeze.
-
-You'll need a `docker.env` file with all the secrets:
+First, you'll need a `docker.env` file with all the secrets:
 
 ```
 API_KEY=what
@@ -52,13 +50,13 @@ AWS_SECRET_ACCESS_KEY=your
 AWS_DEFAULT_REGION=self
 ```
 
-Then you can build the image:
+Then, you can build the image:
 
 ```bash
 docker build . -t meal-planner:latest
 ```
 
-And run it:
+Finally, run it:
 
 ```bash
 docker run --rm \
@@ -71,4 +69,10 @@ I like to chain them together:
 
 ```bash
 docker build . -t meal-planner:latest && docker run --rm --env-file docker.env -v /path/to/meal-planner:/usr/local/src/app -it meal-planner:latest
+```
+
+You'll find yourself in the running docker container. From there you can run the script:
+
+```
+root@b07c5894d6a5:/usr/local/src/app# python planner.py
 ```
