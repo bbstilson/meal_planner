@@ -1,7 +1,7 @@
 import re
 import requests
 
-class Trello:
+class TrelloUtil:
     def __init__(self, key, token, url_base, dinner_list_id):
         self.url = f'{url_base}/lists/{dinner_list_id}/cards'
         self.auth = { 'key': key, 'token': token }

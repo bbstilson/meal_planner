@@ -3,7 +3,7 @@ import random
 
 from s3_util import S3Util
 from ses_util import SESUtil
-from trello import Trello
+from trello_util import TrelloUtil
 
 # Trello envvars
 API_KEY   = os.environ['API_KEY']
@@ -22,7 +22,7 @@ SO_EMAIL  = os.environ['SO_EMAIL']
 def lambda_handler(event, context):
     # 0) Initialize all the helper classes.
     s3 = S3Util(BUCKET, KEY)
-    trello = Trello(API_KEY, TOKEN, URL_BASE, LIST_ID)
+    trello = TrelloUtil(API_KEY, TOKEN, URL_BASE, LIST_ID)
     ses = SESUtil(MY_EMAIL, [ MY_EMAIL, SO_EMAIL ])
 
     # 1) Download suggest counts from S3.
