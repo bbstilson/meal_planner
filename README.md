@@ -87,3 +87,12 @@ docker cp $(docker ps -aq --filter ancestor=meal-planner):/usr/src/app/lambda.zi
 ```
 
 Finally, load the `lambda.zip` file into Lambda.
+
+
+## Testing
+
+All tests live in the [`./test`](./test) dir. To run them from inside the docker container:
+
+```bash
+python -m unittest discover -s test -t test -v
+```
