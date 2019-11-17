@@ -2,6 +2,8 @@ import boto3
 from datetime import datetime
 from typing import Any, Dict, List
 
+from trello_util import Card
+
 class SESUtil:
     def __init__(self, from_email: str, to_emails: List[str]):
         self.from_email = from_email
@@ -12,20 +14,16 @@ class SESUtil:
         now = datetime.now().strftime('%m/%d/%Y')
         return f'Your weekly meal plan is here! - {now}'
 
-    def _mk_body(self, meals) -> str:
+    def _mk_body(self, meals: List[Card]) -> str:
         email = ''
-
         for meal in meals:
-            email += f'<h2>{meal["name"]}</h2>\n'
-            email += f'<a href={meal["url"]}>View on Trello.</a>'
-            email += '<br>\n'
+            email += f'<h2>{meal.name}</h2>'
+            email += f'<a href="{meal.url}">View on Trello.</a>'
+            email += '<br>'
             email += '<strong><p>Ingredients:</p></strong>'
-            email += '<ul>'
-            for ingredient in filter(None, meal["ingredients"].split('\n')):
-                email += f'<li>{ingredient}</li>'
-            email += '</ul>'
-            email += '\n'
-
+            email += '<p>'
+            email += '<br>'.join(meal.ingredients)
+            email += '</p>'
         return email
 
     def send_email(self, meals: List[Dict[str, str]]) -> None:

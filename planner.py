@@ -33,7 +33,7 @@ def lambda_handler(event, context):
 
     # 3) Check that all meals are in the suggest_counts, adding them if they're not.
     for meal in meals:
-        meal_id = meal['id']
+        meal_id = meal.id
         if meal_id not in suggest_counts:
             suggest_counts[meal_id] = 0
 
@@ -52,7 +52,7 @@ def lambda_handler(event, context):
     suggest_counts[snd_mid] += 1
 
     # 7) Send an email.
-    meals_to_send = [meal for meal in meals if meal['id'] == fst_mid or meal['id'] == snd_mid]
+    meals_to_send = [meal for meal in meals if meal.id == fst_mid or meal.id == snd_mid]
     ses.send_email(meals_to_send)
 
     # 8) Finally, update the suggest_counts object in s3.
