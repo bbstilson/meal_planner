@@ -25,7 +25,7 @@ class TrelloUtil:
             removed_newlines = removed_hash.split('\n')
             return list(filter(None, map(lambda s: s.strip(), removed_newlines)))
         except Exception as e:
-            return ('I couldn\'t parse the description 😕. Check the ingredients by clicking the link.')
+            return ['I couldn\'t parse the description 😕. Check the ingredients by clicking the link.']
 
     def _resp_to_card(self, c: Dict[str, str]) -> Card:
         return Card(
