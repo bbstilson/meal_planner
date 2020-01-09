@@ -35,7 +35,11 @@ class TrelloUtil:
             ingredients=self._parse_ingredients(c['desc'])
         )
 
-    def get_meals(self):
+    def get_meals(self) -> Dict[str, Card]:
         print('Fetching cards from Trello.')
         cards = requests.get(url=self.url,params=self.auth).json()
-        return [self._resp_to_card(card) for card in cards]
+        cards = [self._resp_to_card(card) for card in cards]
+        meals_by_id = {}
+        for c in cards:
+            meals_by_id[c.id] = c
+        return meals_by_id
