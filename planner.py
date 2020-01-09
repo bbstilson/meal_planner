@@ -29,13 +29,21 @@ def lambda_handler(event, context):
     suggest_counts = s3.get_suggest_counts()
 
     # 2) Get all meals from Trello.
-    meals = trello.get_meals()
+    meals_by_id = trello.get_meals()
 
     # 3) Check that all meals are in the suggest_counts, adding them if they're not.
-    for meal in meals:
-        meal_id = meal.id
+    # 3.5) Delete meals that are no longer in Trello.
+    for meal_id in meals_by_id:
         if meal_id not in suggest_counts:
             suggest_counts[meal_id] = 0
+
+    meals_to_delete = []
+    for meal_id in suggest_counts:
+        if meal_id not in meals_by_id:
+            meals_to_delete.append(meal_id)
+
+    for mtd in meals_to_delete:
+        del suggest_counts[mtd]
 
     # 4) Give each meal a random likeliness rating: count * random.
     scored = []
@@ -52,7 +60,7 @@ def lambda_handler(event, context):
     suggest_counts[snd_mid] += 1
 
     # 7) Send an email.
-    meals_to_send = [meal for meal in meals if meal.id == fst_mid or meal.id == snd_mid]
+    meals_to_send = [ meals_by_id[fst_mid], meals_by_id[snd_mid] ]
     ses.send_email(meals_to_send)
 
     # 8) Finally, update the suggest_counts object in s3.
