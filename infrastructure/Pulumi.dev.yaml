@@ -1,0 +1,6 @@
+config:
+  aws:region: us-west-2
+  meal-planner:envvars:
+    RUST_BACKTRACE: "1"
+    SUGGESTION_HISTORY_BUCKET: "brandons-dev"
+    SUGGESTION_HISTORY_KEY: "meal-planner/suggestion-history.json"

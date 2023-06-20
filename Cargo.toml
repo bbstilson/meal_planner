@@ -1,0 +1,43 @@
+[workspace]
+members = ["meal-planner-recommender", "meal-planner-responder", "common"]
+package.edition = "2021"
+package.version = "0.1.0"
+package.authors = ["Brandon Stilson <bbgithub@fastmail.com>"]
+
+[workspace.dependencies]
+anyhow = "1.0.71"
+base64 = "0.21.2"
+chrono = { version = "*", features = ["serde"] }
+cooklang = "0.3"
+hex = "0.4.3"
+include_dir = { version = "0.7.3", features = ["glob"] }
+md5 = "0.7.0"
+reqwest = { version = "0.11.18", features = ["json"] }
+serde = "1.0.164"
+serde_json = "1.0.96"
+tokio = { version = "1", features = ["macros"] }
+tracing = { version = "0.1", features = ["log"] }
+tracing-subscriber = { version = "0.3", default-features = false, features = [
+  "fmt",
+] }
+rand = { version = "0.8.5" }
+tera = "1.19.0"
+url = "2.4.0"
+once_cell = "1.18.0"
+
+# AWS
+aws-config = "0.55.3"
+aws-sdk-s3 = "0.28.0"
+aws-sdk-ses = "0.28.0"
+aws_lambda_events = { version = "0.10", default-features = false, features = [
+  "cloudwatch_events",
+] }
+lambda_http = { version = "0.8.1", default-features = false, features = [
+  "apigw_http",
+] }
+
+lambda_runtime = "0.8"
+
+
+[patch.crates-io]
+common = { path = "common" }

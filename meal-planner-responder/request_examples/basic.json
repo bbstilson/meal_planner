@@ -1,0 +1,58 @@
+{
+  "version": "2.0",
+  "routeKey": "$default",
+  "rawPath": "/",
+  "rawQueryString": "meals=Q29jb251dCBDdXJyeSBMZW50aWxzIGFuZCBDdXJyeSBSb2FzdGVkIENhcnJvdHM,SXRhbGlhbiBTYXVzYWdlIGFuZCBXaGl0ZSBCZWFuIFNraWxsZXQ,VmVnZ2llIENoaWxp",
+  "cookies": [],
+  "headers": {
+    "Header1": "value1",
+    "Header2": "value2"
+  },
+  "queryStringParameters": {
+    "meals": "Q29jb251dCBDdXJyeSBMZW50aWxzIGFuZCBDdXJyeSBSb2FzdGVkIENhcnJvdHM,SXRhbGlhbiBTYXVzYWdlIGFuZCBXaGl0ZSBCZWFuIFNraWxsZXQ,VmVnZ2llIENoaWxp"
+  },
+  "pathParameters": {
+    "proxy": ""
+  },
+  "requestContext": {
+    "routeKey": "$default",
+    "accountId": "123456789012",
+    "stage": "$default",
+    "requestId": "id",
+    "authorizer": {
+      "lambda": {
+        "key": "value"
+      }
+    },
+    "apiId": "api-id",
+    "authentication": {
+      "clientCert": {
+        "clientCertPem": "-----BEGIN CERTIFICATE-----\nMIIEZTCCAk0CAQEwDQ...",
+        "issuerDN": "C=US,ST=Washington,L=Seattle,O=Amazon Web Services,OU=Security,CN=My Private CA",
+        "serialNumber": "1",
+        "subjectDN": "C=US,ST=Washington,L=Seattle,O=Amazon Web Services,OU=Security,CN=My Client",
+        "validity": {
+          "notAfter": "Aug  5 00:28:21 2120 GMT",
+          "notBefore": "Aug 29 00:28:21 2020 GMT"
+        }
+      }
+    },
+    "domainName": "id.execute-api.us-west-2.amazonaws.com",
+    "domainPrefix": "id",
+    "time": "12/Mar/2020:19:03:58+0000",
+    "timeEpoch": 1583348638390,
+    "http": {
+      "method": "GET",
+      "path": "/",
+      "protocol": "HTTP/1.1",
+      "sourceIp": "IP",
+      "userAgent": "agent"
+    }
+  },
+  "stageVariables": {
+    "stageVariable1": "value1",
+    "stageVariable2": "value2"
+  },
+  "body": "{\r\n\t\"a\": 1\r\n}",
+  "isBase64Encoded": false
+}
