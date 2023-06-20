@@ -1360,7 +1360,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "meal-planner-recommender"
+name = "meal_planner_recommender"
 version = "0.1.0"
 dependencies = [
  "anyhow",
@@ -1380,7 +1380,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "meal-planner-responder"
+name = "meal_planner_responder"
 version = "0.1.0"
 dependencies = [
  "anyhow",

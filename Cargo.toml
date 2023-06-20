@@ -1,5 +1,5 @@
 [workspace]
-members = ["meal-planner-recommender", "meal-planner-responder", "common"]
+members = ["meal_planner_recommender", "meal_planner_responder", "common"]
 package.edition = "2021"
 package.version = "0.1.0"
 package.authors = ["Brandon Stilson <bbgithub@fastmail.com>"]

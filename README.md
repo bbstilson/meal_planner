@@ -6,7 +6,7 @@ To solve the former problem, we've built up a few dozen meals over the years tha
   
 To solve the latter problem, I used ༼つ ◕_◕ ༽つ ***T E C H N O L O G Y***.
 
-The "algorithm" is laid out in [`main.rs`](./meal_planner/src/main.rs).
+The "algorithm" is laid out in [`main.rs`](./meal-planner-recommender/src/main.rs).
 
 ## Technology
 
@@ -14,15 +14,17 @@ The "algorithm" is laid out in [`main.rs`](./meal_planner/src/main.rs).
 
 [Cloudwatch Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html) are used to trigger the code once per week.
 
-[S3](https://aws.amazon.com/s3/) is used to store a CSV that keeps track of how many times a meal has been suggested.
+[S3](https://aws.amazon.com/s3/) is used to store a JSON file that keeps track of how many times a meal has been suggested.
 
-[SES](https://aws.amazon.com/ses/) is used to email my partner and I with the meals for the week.
+[SES](https://aws.amazon.com/ses/) is used to send emails.
 
 ## Getting Started
 
 ```bash
 python3 -m pip install cargo-lambda
 ```
+
+See ea
 
 ## Testing
 
